@@ -1,7 +1,11 @@
+import { Banner } from "./Banner";
+import { Coffe } from "./Coffes";
+
 export function Home() {
     return (
-        <div>
-            <h1>Home</h1>
-        </div>
+        <>
+            <Banner />
+            <Coffe />
+        </>
     );
 }
