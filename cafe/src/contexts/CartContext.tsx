@@ -22,21 +22,16 @@ export function CartContextProvider({ children }: CartContextPrivderProps) {
     cart: [],
   })
 
-  const coffee = {cartState};  
-
   function removeCoffee(item: coffeeCartType) {
     dispatch({
       type: 'REMOVE_COFFEE',
-      payload: {
-        item,
-      },
+      payload: { item },
     })
   }
 
   function addCoffee(item: coffeeCartType) {
     dispatch(addCoffeeAction(item))
   }
-
 
   function updateList(item: coffeeCartType) {
     dispatch(updateListAction(item))
@@ -51,7 +46,7 @@ export function CartContextProvider({ children }: CartContextPrivderProps) {
   }
 
   return (
-    <CartContext.Provider value={{ coffee : coffee.cartState.cart, removeCoffee, addCoffee, updateList, removeList, removeAll }}>
+    <CartContext.Provider value={{ coffee: cartState.cart, removeCoffee, addCoffee, updateList, removeList, removeAll }}>
       {children}
     </CartContext.Provider>
   )

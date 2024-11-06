@@ -240,16 +240,20 @@ export function Modal({isModalOpen, closeModal}: ModalProps) {
                     <DivSeeRequest>
                         <DivContentSeeRequest>
 
-                        {coffee.map((item: coffeeCartType) => (
-                            <CoffeeCard
-                                image={item.image}
-                                name={item.name}
-                                value={item.value}
-                                valueTotal={item.valueTotal}
-                                amount={item.amount}
-                                key={item.name}
-                            />
-                            ))}
+                        {coffee && coffee.length > 0 ? (
+                            coffee.map((item: coffeeCartType) => (
+                                <CoffeeCard
+                                    image={item.image}
+                                    name={item.name}
+                                    value={item.value}
+                                    valueTotal={item.valueTotal}
+                                    amount={item.amount}
+                                    key={item.name}
+                                />
+                            ))
+                        ) : (
+                            <p>Nenhum item no carrinho.</p>
+                        )}
 
                         </DivContentSeeRequest>
 
@@ -258,14 +262,14 @@ export function Modal({isModalOpen, closeModal}: ModalProps) {
                                 <span>Total de itens</span>
                                 <div>
                                     <span>R$</span>
-                                    <span>29,70</span>
+                                    <span>{total}</span>
                                 </div>
                             </div>
                             <div>
                                 <span>Entrega</span>
                                 <div>
                                     <span>R$</span>
-                                    <span>3,50</span>
+                                    <span>{delivery}</span>
                                 </div>
                             </div>
                             <div>

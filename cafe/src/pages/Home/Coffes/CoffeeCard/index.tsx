@@ -63,7 +63,7 @@ export function CardCoffe({img, name, description, value, tag}: CoffeeType) {
                         </div>
                         <div>
                             <Cart backgroundColor="purple-dark">
-                                <ShoppingCart size={20} color="white" />
+                                <ShoppingCart size={20} color="white" onClick={handleAddtoCart}/>
                             </Cart>
                         </div>
                     </div>
