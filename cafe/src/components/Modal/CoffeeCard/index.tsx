@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { CartContext } from "../../../contexts/CartContext"
 import { ButtonWithIcon, CoffeActions, CoffeeAmountContainerWithText, CoffeeCardContainer, CoffeeName, Container, CurrencyValue, Spacer } from "./style"
-import { DivValue } from "../../../pages/Home/Coffes/CoffeeCard/style"
+import { DivButtonsAddDecrease, DivValue } from "../../../pages/Home/Coffes/CoffeeCard/style"
 import { Trash } from "phosphor-react"
 import { coffeeCartType } from "../../../reduces/cart/reducer"
 
@@ -20,12 +20,15 @@ export function CoffeeCard({
 
     function handleChangeAmount(plus: boolean) {
         if (plus) {
-        setAmount((state) => state + 1)
+        setAmount((state) => state + 1);
         setValueTotal((state) => state + value)
         updateList({ image, name, valueTotal, value, amount: coffeAmount + 1 })
         } else {
+        if (coffeAmount === 1) {
+          return;
+        }
         setAmount((state) => state - 1)
-        setValueTotal((state) => state - value)
+        setValueTotal((state) => state - value);
         updateList({ image, name, valueTotal, value, amount: coffeAmount - 1 })
         }
     }
@@ -41,19 +44,15 @@ export function CoffeeCard({
           <CoffeeAmountContainerWithText>
             <CoffeeName>{name}</CoffeeName>
             <CoffeActions>
-                <DivValue>
-                    <div>
-                        <div>
-                            <button onClick={() => handleChangeAmount(false)}>-</button>
-                            <input type="nuber" value={amount} />
-                            <button onClick={() => handleChangeAmount(true)}>+</button>
-                        </div>
-                    </div>
-                </DivValue>
-              <ButtonWithIcon onClick={() => handleRemoveCoffee()}>
-                <Trash size={20} color="#8047f8" />
-                <span>Remover</span>
-              </ButtonWithIcon>
+                <DivButtonsAddDecrease padding={8} height={40} width={72} marginTop={0}>
+                    <button onClick={() => handleChangeAmount(false)}>-</button>
+                    <input value={coffeAmount} />
+                    <button onClick={() => handleChangeAmount(true)}>+</button>
+                </DivButtonsAddDecrease>
+                <ButtonWithIcon height={40} width={91} padding={8} marginTop={0} onClick={() => handleRemoveCoffee()}>
+                    <Trash size={20} color="#8047f8" />
+                    <span>Remover</span>
+                </ButtonWithIcon>
             </CoffeActions>
           </CoffeeAmountContainerWithText>
           <CurrencyValue>

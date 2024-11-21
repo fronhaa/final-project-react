@@ -64,4 +64,5 @@ export const Cart = styled.button<backgroundColorProps>`
   text-decoration: none;
   border: none;
   position: relative;
+  cursor: pointer;
 `;

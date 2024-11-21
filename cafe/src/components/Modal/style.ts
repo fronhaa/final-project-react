@@ -4,11 +4,11 @@ import styled, { keyframes } from 'styled-components'
 const fadeIn = keyframes`
   from {
     opacity: 0;
-    transform: scale(0.9); /* Começa menor e transparente */
+    transform: scale(0.9);
   }
   to {
     opacity: 1;
-    transform: scale(1); /* Chega ao tamanho natural e opaco */
+    transform: scale(1);
   }
 `;
 
@@ -106,7 +106,7 @@ export const DivSeeRequest = styled.div`
 
         & div {
             display: flex;
-            flex-direction: row !important;
+            flex-direction: row;
             gap: 5px !important;
             align-items: center;
             justify-content: space-between;

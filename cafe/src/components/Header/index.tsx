@@ -6,14 +6,27 @@ import {
   Cart,
   NavMenu,
 } from "./styles";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logo from '../../assets/Logo.png';
 import { CardsThree, MapPin, ShoppingCart } from "@phosphor-icons/react";
 import { Modal } from "../Modal";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 export function Header() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const location = useLocation();
+  const { coffee } = useContext(CartContext);
+  const [isCloseCart, setIsCloseCart] = useState(true);
+
+  console.log('TES',location);
+
+  useEffect(() => {
+    if(location.state){
+      closeModal();
+      closeCart();
+    }
+  }, [location]);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -21,6 +34,10 @@ export function Header() {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const closeCart = () => {
+    setIsCloseCart(false);
   };
 
   return (
@@ -35,7 +52,7 @@ export function Header() {
           </ Location>
           <Cart backgroundColor="yellow-light" onClick={openModal}>
             <ShoppingCart size={20} color="#C47F17" />
-            {/* <div style={{borderRadius: '50%', backgroundColor: 'red', position: 'absolute', width: '50%', top: '-7px', right: '-7px', color: 'white'}}>1</div> */}
+            {coffee.length > 0 && <div style={{borderRadius: '50%', backgroundColor: 'red', position: 'absolute', width: '50%', top: '-7px', right: '-7px', color: 'white'}}>{coffee.length}</div>}
           </Cart>
         </NavMenu>
       </HeaderContainer>

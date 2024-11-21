@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useReducer } from 'react'
 import { cartReducer, coffeeCartType } from '../reduces/cart/reducer'
 import { addCoffeeAction, removeAllAction, removeCoffeeAction, updateListAction } from '../reduces/cart/actions'
+import { toast } from 'react-toastify'
 
 interface CartInterfaceType {
   coffee: coffeeCartType[]
@@ -30,11 +31,12 @@ export function CartContextProvider({ children }: CartContextPrivderProps) {
   }
 
   function addCoffee(item: coffeeCartType) {
-    dispatch(addCoffeeAction(item))
+    dispatch(addCoffeeAction(item));
+    toast.success("Café adicionado ao carrinho!");
   }
 
   function updateList(item: coffeeCartType) {
-    dispatch(updateListAction(item))
+    dispatch(updateListAction(item));
   }
 
   function removeList(item: coffeeCartType) {

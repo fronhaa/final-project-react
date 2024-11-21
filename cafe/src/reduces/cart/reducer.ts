@@ -27,7 +27,7 @@ export function cartReducer(state: coffeeCartState, action: any) {
       })
     case ActionTypes.UPDATE_LIST:
       return produce(state, (draft) => {
-        draft.cart.find((item) => {
+        draft.cart.map((item) => {
           if (item.name === action.payload.updateList.name) {
             item.amount = action.payload.updateList.amount
             item.valueTotal =

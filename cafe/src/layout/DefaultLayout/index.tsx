@@ -1,12 +1,16 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { LayoutContainer } from "./styles";
 import { Slide, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { Header } from "../../components/Header";
 export function DefaultLayout() {
+  const location = useLocation();
+
+  const showHeader = location.pathname !== '/entrega';
+
   return (
     <div>
-      <Header />
+      {showHeader && <Header />}
       <LayoutContainer>
         <ToastContainer
           position="top-right"

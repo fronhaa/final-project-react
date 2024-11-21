@@ -1,5 +1,13 @@
 import styled from "styled-components";
 
+interface DivButtonsAddDecreaseProps {
+    padding: number,
+    height: number,
+    width:number,
+    marginTop:number,
+    flexWrap?: string
+};
+
 export const CardCoffeDiv = styled.div`
     width: 256px;
     height: 310px;
@@ -86,26 +94,8 @@ export const DivValue = styled.div`
         align-items: center;
         margin-top: 0;
 
-        & div:nth-child(1) {
-            background-color: ${props => props.theme["base-button"]};
-            padding: 8px;
-            border-radius: 6px;
-
-            & button {
-                background-color: ${props => props.theme["base-button"]};
-            }
-        }
-
-        & input {
-            width: 20px;
-            height: 21px;
-            border: none;
-            background: transparent;
-            text-align: center;
-        };
-
         & h4 {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 800;
             color: ${props => props.theme["base-text"]};
         }
@@ -115,11 +105,40 @@ export const DivValue = styled.div`
             font-weight: 400;
             background-color: transparent;
             color: ${props => props.theme["base-text"]};
-            padding: 4px;
+            padding-top: 4px;
         }
 
         & button {
             border: none;
         }
     }
+`;
+
+export const DivButtonsAddDecrease = styled.div<DivButtonsAddDecreaseProps>`
+    background-color: ${props => props.theme["base-button"]};
+    padding: ${props => props.padding}px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: row !important;
+    width: ${props => props.width}px;
+    height: ${props => props.height}px;
+    flex-wrap: ${props => props.flexWrap} !important;
+
+    & button {
+        background-color: ${props => props.theme["base-button"]} !important;
+        margin-top: ${props => props.marginTop}px !important;
+        color: ${props => props.theme['purple']} !important;
+        padding: 0 !important;
+        width: 50px !important;
+        font-size: 20px !important;
+        cursor: pointer;
+    }
+
+    & input {
+        border: none;
+        background: transparent;
+        text-align: center;
+        width: 20px;
+        height: 21px;
+    };
 `;

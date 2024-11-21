@@ -1,7 +1,7 @@
 import { ShoppingCart } from "@phosphor-icons/react";
 import { CoffeeType } from "..";
 import { Cart } from "../../../../components/Header/styles";
-import { CardCoffeDiv, DivText, DivValue } from "./style";
+import { CardCoffeDiv, DivButtonsAddDecrease, DivText, DivValue } from "./style";
 import { useContext, useState } from "react";
 import { CartContext } from "../../../../contexts/CartContext";
 
@@ -31,7 +31,7 @@ export function CardCoffe({img, name, description, value, tag}: CoffeeType) {
         amount,
         value,
         image: img,
-        })
+        });
     }
 
     return (
@@ -51,16 +51,18 @@ export function CardCoffe({img, name, description, value, tag}: CoffeeType) {
 
                 <DivValue>
                     <div>
-                        <span>R$</span>
-                        <h4>{value}</h4>
+                        <span>R$</span> 
+                        <h4>{Number(value?.toFixed(2))?.toLocaleString('pt-BR', {
+                            minimumFractionDigits: 2,
+                        })}</h4>
                     </div>
 
                     <div>
-                        <div>
+                        <DivButtonsAddDecrease padding={8} height={38} width={72} marginTop={0} flexWrap={'nowrap'}>
                             <button onClick={() => handleChangeAmount(false)}>-</button>
-                            <input type="nuber" value={amount} />
+                            <input value={amount} />
                             <button onClick={() => handleChangeAmount(true)}>+</button>
-                        </div>
+                        </DivButtonsAddDecrease>
                         <div>
                             <Cart backgroundColor="purple-dark">
                                 <ShoppingCart size={20} color="white" onClick={handleAddtoCart}/>

@@ -15,7 +15,7 @@ interface ModalProps {
 }
 
 export function Modal({isModalOpen, closeModal}: ModalProps) {
-    const { coffee } = useContext(CartContext)
+    const { coffee } = useContext(CartContext);
     const [total, setTotal] = useState(0)
     const [delivery, setDelivery] = useState(3.5)
     const navigate = useNavigate()
@@ -60,10 +60,6 @@ export function Modal({isModalOpen, closeModal}: ModalProps) {
         transition: Bounce,
     };
 
-    if (methodPayment === '') {
-      toast.info('Necessita de um metodo de pagamento', toastOptions)
-      return
-    }
     if (adress.cep === '') {
       toast.info('Necessita de um CEP', toastOptions)
       return
@@ -88,13 +84,17 @@ export function Modal({isModalOpen, closeModal}: ModalProps) {
       toast.info('Necessita de um uf', toastOptions)
       return
     }
+    if (methodPayment === '') {
+        toast.info('Necessita de um metodo de pagamento', toastOptions)
+        return
+    }
 
     const state = {
       methodPayment,
       value: total + delivery,
       adress,
     }
-    navigate('/checkout', { state })
+    navigate('/entrega', { state })
   }
 
   return (
@@ -261,22 +261,31 @@ export function Modal({isModalOpen, closeModal}: ModalProps) {
                             <div>
                                 <span>Total de itens</span>
                                 <div>
-                                    <span>R$</span>
-                                    <span>{total}</span>
+                                    <span>{Number(total?.toFixed(2))?.toLocaleString('pt-BR', {
+                                        style: 'currency',
+                                        currency: 'BRL',
+                                        minimumFractionDigits: 2,
+                                    })}</span>
                                 </div>
                             </div>
                             <div>
                                 <span>Entrega</span>
                                 <div>
-                                    <span>R$</span>
-                                    <span>{delivery}</span>
+                                    <span>{Number(delivery?.toFixed(2))?.toLocaleString('pt-BR', {
+                                        style: 'currency',
+                                        currency: 'BRL',
+                                        minimumFractionDigits: 2,
+                                    })}</span>
                                 </div>
                             </div>
                             <div>
                                 <span>Total</span>
                                 <div>
-                                    <span>R$</span>
-                                    <span>33,20</span>
+                                    <span>{Number((total + delivery)?.toFixed(2))?.toLocaleString('pt-BR', {
+                                        style: 'currency',
+                                        currency: 'BRL',
+                                        minimumFractionDigits: 2,
+                                    })}</span>
                                 </div>
                             </div>
                             <button onClick={handleConfirmDelivery}>CONFIRMAR PEDIDO</button>
